@@ -11,5 +11,26 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
+// 1 - Prompt for Managers details
+// 1 - Name, Employe Id, Email address, Office Number
+// 1 - add to employee array
 
+
+// 2 - In a loop, Display "menu" 
+// 2 - "Add an engineer", "Add an Intern", "Build team"
+
+
+// 3 - Add an engineer prompts for
+// 3 - Name, Id, Email, Github name
+// 3 - add to employee array
+
+
+// 4 - Add an intern prompts for
+// 4 - Name, Id, Email, School
+// 4 - add to employee array
+
+
+// 5 - Build team does
+// 5 - Exits the loop
+// 5 - call "render" with an array of employee objects
+// 5 - create the team.html file with the returned HTML from render
