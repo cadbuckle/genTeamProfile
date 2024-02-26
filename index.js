@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 const qs = require("./src/questions.js");
+const htmlCss = ("./src/style.css");
 
 let employees = [];
 
@@ -91,16 +92,28 @@ async function getIntern() {
 // 5 - Build team does
 // 5 - Exits the loop
 // 5 - call "render" with an array of employee objects
-// 5 - create the team.html file with the returned HTML from render
 function buildTeam() {
   let ret = render(employees);
-  console.log(ret);
   writeToFile(outputPath, ret);
 }
 
+// 5 - create the team.html file with the returned HTML from render
 function writeToFile(fileName, data) {
+  // check if folder exists
+  let folderPath = path.dirname(fileName);
+  if (!fs.existsSync(folderPath)) {
+    // If not then create
+    fs.mkdirSync(folderPath);
+  }
+  // write file to folder.
   fs.writeFile(fileName, data, (err) => {
-    err ? console.error(err) : console.log("Ok");
+    err ? console.error(err) : console.log("HTML created at "+fileName);
+  });
+
+  fs.readFile(htmlCss, "utf8", function(err,data){
+    fs.writeFile(folderPath+"/style.css", data, (err) => {
+      err ? console.error(err) : console.log("Associated CSS created");
+    });
   });
 }
 

@@ -80,7 +80,7 @@ const qManName = [
   {
     type: "input",
     name: "empName",
-    message: "Enter the Manager's name",
+    message: "\nEnter the Manager's name",
     default: "",
     validate(value) {
       if (!value) {
@@ -94,7 +94,7 @@ const qEngName = [
   {
     type: "input",
     name: "empName",
-    message: "Enter the Engineer's name",
+    message: "\nEnter the Engineer's name",
     default: "",
     validate(value) {
       if (!value) {
@@ -108,7 +108,7 @@ const qIntName = [
   {
     type: "input",
     name: "empName",
-    message: "Enter the Intern's name",
+    message: "\nEnter the Intern's name",
     default: "",
     validate(value) {
       if (!value) {
