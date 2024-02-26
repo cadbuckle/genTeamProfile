@@ -7,18 +7,6 @@
 const qAll = [
   {
     type: "input",
-    name: "empName",
-    message: "Enter the employees name",
-    default: "",
-    validate(value) {
-      if (!value) {
-        return "Please enter the employees Name";
-      }
-      return true;
-    },
-  },
-  {
-    type: "input",
     name: "empId",
     message: "Enter the employee ID",
     default: "",
@@ -88,6 +76,50 @@ const qInt = [
   },
 ];
 
+const qManName = [
+  {
+    type: "input",
+    name: "empName",
+    message: "Enter the Manager's name",
+    default: "",
+    validate(value) {
+      if (!value) {
+        return "Please enter the employees Name";
+      }
+      return true;
+    },
+  },
+];
+const qEngName = [
+  {
+    type: "input",
+    name: "empName",
+    message: "Enter the Engineer's name",
+    default: "",
+    validate(value) {
+      if (!value) {
+        return "Please enter the employees Name";
+      }
+      return true;
+    },
+  },
+];
+const qIntName = [
+  {
+    type: "input",
+    name: "empName",
+    message: "Enter the Intern's name",
+    default: "",
+    validate(value) {
+      if (!value) {
+        return "Please enter the employees Name";
+      }
+      return true;
+    },
+  },
+];
+
+
 const qMnu = [
   {
     type: "rawlist",
@@ -98,7 +130,7 @@ const qMnu = [
   },
 ];
 
-exports.mgrQs = qAll.concat(qMan);
-exports.engQs = qAll.concat(qEng);
-exports.intQs = qAll.concat(qInt);
+exports.mgrQs = qManName.concat(qAll, qMan);
+exports.engQs = qEngName.concat(qAll, qEng);
+exports.intQs = qIntName.concat(qAll, qInt);
 exports.mnuQs = qMnu;

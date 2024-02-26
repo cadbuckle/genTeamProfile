@@ -10,16 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 const qs = require("./src/questions.js");
-const Employee = require("./lib/Employee.js");
 
 let employees = [];
-let retAns = "";
-
-// function askQuestions(questions){
-//     return inquirer.prompt(questions).then((answers) => {
-//         return answers;
-//     })
-// }
 
 function askQuestions(questions, empType) {
   return new Promise((resolve) => {
@@ -34,26 +26,28 @@ function askQuestions(questions, empType) {
 }
 
 function addEmployee(empData) {
-  let emp = new Employee();
-  emp.name = empData.empName;
-  emp.id = empData.empId;
-  emp.email = empData.empEmail;
   switch (empData.empType) {
     case "Manager":
       let man = new Manager();
-      man = emp;
+      man.name = empData.empName;
+      man.id = empData.empId;
+      man.email = empData.empEmail;
       man.officeNumber = empData.empPhone;
       employees.push(man);
       break;
     case "Engineer":
       let eng = new Engineer();
-      eng = emp;
+      eng.name = empData.empName;
+      eng.id = empData.empId;
+      eng.email = empData.empEmail;
       eng.github = empData.empGit;
       employees.push(eng);
       break;
     case "Intern":
       let int = new Intern();
-      int = emp;
+      int.name = empData.empName;
+      int.id = empData.empId;
+      int.email = empData.empEmail;
       int.school = empData.empSchool;
       employees.push(int);
       break;
@@ -67,14 +61,15 @@ function addEmployee(empData) {
 // 1 - add to employee array
 async function getManager() {
   let ret = await askQuestions(qs.mgrQs, "Manager");
-  console.log(employees);
+  return ret;
 }
 
 // 2 - In a loop, Display "menu"
 // 2 - "Add an engineer", "Add an Intern", "Build team"
 async function runMenu() {
   let ret = await askQuestions(qs.mnuQs, "Menu");
-  console.log(ret);
+  let val = ret.mnuItm;
+  return val;
 }
 
 // 3 - Add an engineer prompts for
@@ -82,7 +77,7 @@ async function runMenu() {
 // 3 - add to employee array
 async function getEngineer() {
   let ret = await askQuestions(qs.engQs, "Engineer");
-  console.log(employees);
+  return ret;
 }
 
 // 4 - Add an intern prompts for
@@ -90,20 +85,44 @@ async function getEngineer() {
 // 4 - add to employee array
 async function getIntern() {
   let ret = await askQuestions(qs.intQs, "Intern");
-  console.log(employees);
+  return ret;
 }
 
 // 5 - Build team does
 // 5 - Exits the loop
 // 5 - call "render" with an array of employee objects
 // 5 - create the team.html file with the returned HTML from render
+function buildTeam() {
+  let ret = render(employees);
+  console.log(ret);
+  writeToFile(outputPath, ret);
+}
+
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) => {
+    err ? console.error(err) : console.log("Ok");
+  });
+}
+
 
 async function runFuncs() {
   let ret;
   ret = await getManager();
-  ret = await runMenu();
-  ret = await getEngineer();
-  ret = await getIntern();
+  ret = "";
+  while (ret !== "Build Team"){
+    ret = await runMenu();
+    switch (ret) {
+      case "Add Engineer":
+        ret = await getEngineer();   
+        break;
+      case "Add Intern":
+        ret = await getIntern();
+        break
+      default:
+        break;
+    }
+  }
+  buildTeam();
 }
 
 runFuncs();
