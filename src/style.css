@@ -1,23 +1,42 @@
 .jumbotron {
-  background-color: papayawhip;
+  background-color:#fbf0d4;
 }
 
 /* Cards */
 .content {
   padding: 50px;
 }
-.sectionHeading {
-  text-align: center;
-}
-.showsNear {
-  padding: 0px 30px 30px 30px;
-}
-.cardContainer {
-  text-align: center;
-}
-
 .team-area {
   display: flex !important;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+.card{
+  margin: 2px;
+}
+
+h1, h2{
+  text-shadow: #AAA 1.2px 1.2px 1px;
+  font-family: 'Linux Libertine','Georgia','Times',serif;
+}
+h1{  
+  font-weight: 750;
+  font-style: oblique;
+  font-size: xxx-large
+}
+h2{
+  font-weight: 500;
+
+}
+
+.card-header {
+  background-color: #f0ddbd;
+}
+
+.card-body{
+  background-color: #f8f9fa;
+}
+
+.list-group-item{
+  border: 0px;
 }
